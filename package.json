@@ -1,0 +1,29 @@
+{
+  "name": "l29_6_2",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "node app",
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "alphavantage": "^2.3.0",
+    "axios": "^0.27.2",
+    "bcrypt": "^5.0.1",
+    "cores": "^0.8.5",
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "joi": "^17.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "mongoose": "^6.2.9",
+    "node-fetch": "^2.6.7",
+    "nodemailer": "^6.7.8"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
