@@ -213,7 +213,7 @@ const post_barcode = async (req, res) => {
 	let date_time = current_date+" "+current_time;	
 	
     let barcodeObject = {
-      userId: req.headers["x-api-key"]._id,
+      userId: req.headers["x-api-key"],
       userName: req.body.userName,
       barcode: req.body.barcode,
       date_created: date_time
