@@ -6,6 +6,7 @@ const { barcodeModel } = require("../models/barcodeModel");
 const { saleModel } = require("../models/saleModel");
 const { UserModel } = require("../models/userModel");
 const { valueByTime, valueByDay, getH_L, getByRange4 } = require("../services/serv");
+const jwt = require("jsonwebtoken");
 
 const add_fav = async (req, res) => {
   try {
@@ -210,10 +211,11 @@ const post_barcode = async (req, res) => {
     let date = new Date();
 	let current_date = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate();
 	let current_time = date.getHours()+":"+date.getMinutes()+":"+ date.getSeconds();
-	let date_time = current_date+" "+current_time;	
+	let date_time = current_date+" "+current_time;
+  let decodeToken = jwt.verify(req.headers["x-api-key"],"nivoscrypt");	
 	
     let barcodeObject = {
-      userId: req.headers["x-api-key"],
+      userId: decodeToken._id,
       userName: req.body.userName,
       barcode: req.body.barcode,
       date_created: date_time

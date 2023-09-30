@@ -62,7 +62,7 @@ const login = async(req,res) => {
     }
     // generate and send token
     let token = genToken(user.id,user.role);
-    res.status(200).json({token,user:{userName:user.userName,role:user.role}});
+    res.status(200).json({token,user:{userName:user.userName,role:user.role,user_id:_id}});
   }
   catch(err){
   
