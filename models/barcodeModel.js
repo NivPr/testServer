@@ -21,7 +21,6 @@ exports.validatebarcode = (_reqBody) => {
   let joiSchema = Joi.object({
     userName:Joi.string().min(2).max(99).required(),
     userId:Joi.string().min(2).max(150).email().required(),
-    symbol:Joi.string().min(3).max(99).required(),
     barcode:Joi.string().min(3).max(99).required(),
     date_created:Joi.string().min(3).max(99).required(),
     

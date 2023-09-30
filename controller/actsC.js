@@ -2,7 +2,7 @@ const { date, symbol } = require("joi");
 const { default: fetch } = require("node-fetch");
 const { actModel } = require("../models/actModel");
 const { buysModel } = require("../models/buysModel");
-const { commentModel } = require("../models/commentModel");
+const { barcodeModel } = require("../models/barcodeModel");
 const { saleModel } = require("../models/saleModel");
 const { UserModel } = require("../models/userModel");
 const { valueByTime, valueByDay, getH_L, getByRange4 } = require("../services/serv");
@@ -169,8 +169,8 @@ const getByRange3 = async (req, res) => {
     let symbol = req.query.symbol;
    
     let ar = await valueByDay(symbol, "FULL");
-    let comments = await commentModel.find({symbol:symbol.toUpperCase()});
-    console.log(comments)
+    let barcodes = await barcodeModel.find({symbol:symbol.toUpperCase()});
+    console.log(barcodes)
     let s = req.query.s;
     let e = req.query.e;
     let filterd_ar = getByRange4(ar, s, e)
@@ -181,7 +181,7 @@ const getByRange3 = async (req, res) => {
 
 
   
-    res.status(201).json({ filterd_ar, close,comments });
+    res.status(201).json({ filterd_ar, close,barcodes });
 
   }
 
@@ -205,23 +205,22 @@ const getByRange3 = async (req, res) => {
 // }
 
 
-const post_comment = async (req, res) => {
+const post_barcode = async (req, res) => {
   try {
     let date = new Date();
 	let current_date = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate();
 	let current_time = date.getHours()+":"+date.getMinutes()+":"+ date.getSeconds();
 	let date_time = current_date+" "+current_time;	
 	
-    let commentObject = {
+    let barcodeObject = {
       userId: req.tokenData._id,
       userName: req.body.userName,
-      symbol: req.body.symbol,
-      comment: req.body.comment,
+      barcode: req.body.barcode,
       date_created: date_time
     }
-    let comment = new commentModel(commentObject);
-    await comment.save()
-    res.status(201).json(comment);
+    let barcode = new barcodeModel(barcodeObject);
+    await barcode.save()
+    res.status(200).json(barcode);
 
 
   }
@@ -236,5 +235,5 @@ module.exports = {
   getByTime,
   callculate_profits,
   getByRange3,
-  post_comment
+  post_barcode
 }

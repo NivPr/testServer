@@ -19,7 +19,7 @@ const checkToken = async(req,res) => {
     user.password = await bcrypt.hash(user.password,10);
     await user.save();
     user.password = "*****"
-    res.status(201).json(user);
+    res.status(200).json(user);
   }
   catch(err){
     if(err.code == 11000){
@@ -62,7 +62,7 @@ const login = async(req,res) => {
     }
     // generate and send token
     let token = genToken(user.id,user.role);
-    res.json({token,user:{name:user.name,role:user.role}});
+    res.json({token,user:{name:user.userName,role:user.role}});
   }
   catch(err){
   
