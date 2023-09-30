@@ -230,6 +230,26 @@ const post_barcode = async (req, res) => {
     res.status(500).json({ problem: "problem" })
   }
 }
+const delete_barcode = async (req, res) => {
+  try {
+    // Get the identifier (_id) you want to delete from the request
+    const barcodeId = req.body.barcodeId; // I assume you're using a parameter in the URL, for example: '/api/barcodes/:barcodeId'
+
+    // Use the deleteOne or remove method to delete the document from the database
+    const result = await barcodeModel.deleteOne({ _id: barcodeId }); // or barcodeModel.remove({ _id: barcodeId })
+
+    // Check if the document was successfully deleted
+    if (result.deletedCount === 1) {
+      res.status(200).json({ message: 'Document deleted successfully' });
+    } else {
+      res.status(404).json({ message: 'Document not found' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ problem: 'Error deleting document' });
+  }
+}
+
 
 module.exports = {
   add_fav,
@@ -237,5 +257,6 @@ module.exports = {
   getByTime,
   callculate_profits,
   getByRange3,
-  post_barcode
+  post_barcode,
+  delete_barcode
 }
