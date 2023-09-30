@@ -10,7 +10,7 @@ router.get("/getByTime", getByTime);
 router.get('/cal', auth, callculate_profits);
 router.get('/range', getByRange3);
 router.post('/post_barcode',auth ,post_barcode);
-router.delete('/post_barcode',auth ,delete_barcode);
+router.delete('/delete_barcode',auth ,delete_barcode);
 
 
 
