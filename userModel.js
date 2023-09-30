@@ -37,7 +37,7 @@ exports.validateUser = (_reqBody) => {
 // for update user, not allowed to send password
 exports.validateEditUser = (_reqBody) => {
   let joiSchema = Joi.object({
-    name:Joi.string().min(2).max(99).required(),
+    userName:Joi.string().min(2).max(99).required(),
     email:Joi.string().min(2).max(150).email().required(),
     phone:Joi.string().min(9).max(99).required(),
     role:Joi.string().min(2).max(99)

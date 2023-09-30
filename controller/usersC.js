@@ -43,7 +43,7 @@ const userInfo = async(req,res) => {
 
 const login = async(req,res) => {
   let validBody = validateLogin(req.body)
-  console.log("kkkkkkkk")
+  
   
   if(validBody.error){
     return res.status(400).json(validBody.error.details);

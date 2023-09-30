@@ -13,8 +13,6 @@
     "alphavantage": "^2.3.0",
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
-    "cores": "^0.8.5",
-    "cors": "^2.8.5",
     "express": "^4.17.2",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
