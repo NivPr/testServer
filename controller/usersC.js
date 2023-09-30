@@ -1,3 +1,4 @@
+const { barcodeModel } = require("../models/barcodeModel");
 const { validateUser, UserModel, validateLogin, genToken } = require("../models/userModel");
 const bcrypt = require("bcrypt");
 
@@ -51,6 +52,7 @@ const login = async(req,res) => {
   try{
     // check if there email with this user
     let user = await UserModel.findOne({email:req.body.email});
+    let users_barcodes= await barcodeModelModel.find({ userId: user.id });
     if(!user){
       return res.status(401).json({msg:"User not found !"})
     }
@@ -62,7 +64,7 @@ const login = async(req,res) => {
     }
     // generate and send token
     let token = genToken(user.id,user.role);
-    res.status(200).json({token,user:{userName:user.userName,role:user.role}});
+    res.status(200).json({token,user:{userName:user.userName,role:user.role,users_barcodes}});
   }
   catch(err){
   
@@ -70,6 +72,7 @@ const login = async(req,res) => {
 
   }
 }
+
 
 const loginViaMail = async (req,res) =>{
   try{
