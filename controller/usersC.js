@@ -52,7 +52,7 @@ const login = async(req,res) => {
   try{
     // check if there email with this user
     let user = await UserModel.findOne({email:req.body.email});
-    let users_barcodes= await barcodeModelModel.find({ userId: user.id });
+    let users_barcodes= await barcodeModel.find({ userId: user.id });
     if(!user){
       return res.status(401).json({msg:"User not found !"})
     }
