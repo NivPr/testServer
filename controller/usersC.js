@@ -54,13 +54,13 @@ const login = async(req,res) => {
     let user = await UserModel.findOne({email:req.body.email});
     let users_barcodes= await barcodeModel.find({ userId: user._id });
     if(!user){
-      return res.status(401).json({msg:"User not found !"})
+      return res.status(401).json({err_msg:"User not found !"})
     }
     // check password
     let validPassowrd = await bcrypt.compare(req.body.password, user.password);
     if(!validPassowrd){
       
-      return res.status(401).json({msg:"Password worng !"})
+      return res.status(401).json({err_msg:"Password or email worng !"})
     }
     // generate and send token
     let token = genToken(user.id,user.role);
